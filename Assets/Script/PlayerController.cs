@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public float speed = 10.0f;
     public float jumpForce = 25f;
     private bool isGrounded = false;
+    private bool isCrouching = false;
     
     private Rigidbody rb;
     private CapsuleCollider capsuleCollider;
@@ -75,24 +76,32 @@ public class PlayerController : MonoBehaviour
             isGrounded = false;
             Debug.Log("jumping");
         }
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftControl))
         {
-            Debug.Log("Shift is pressed");
+            Debug.Log("LeftCtrl is pressed");
             //transform.localScale = Vector3.Scale(transform.localScale, transform.localScale / 3);
 
-            if (capsuleCollider != null)
+
+            if (isCrouching == false)
             {
                 // Modify the size properties as needed
-                capsuleCollider.center = new Vector3(0f, 0.5f, 0f); // Example center position
-                capsuleCollider.radius = 2.0f; // Example radius
-                capsuleCollider.height = 4.0f; // Example height
+                capsuleCollider.center = new Vector3(0f, -0.5f, 0f); // Example center position
+                capsuleCollider.radius = 0.5f; // Example radius
+                capsuleCollider.height = 1.0f; // Example height
+
+                isCrouching = true;
+                Debug.Log("GET DOWN!");
             }
-            else
-            {
-                Debug.Log("collider back to normal");
-                Debug.LogError("Capsule Collider not found on this GameObject.");
+            else {
+                // Modify the size properties as needed
+                capsuleCollider.center = new Vector3(0f, 0f, 0f); // Example center position
+                capsuleCollider.radius = 0.5f; // Example radius
+                capsuleCollider.height = 2.0f; // Example height
+
+                isCrouching = false;
+                Debug.Log("STAND UP!");
             }
-            
+                      
 
             
         }
