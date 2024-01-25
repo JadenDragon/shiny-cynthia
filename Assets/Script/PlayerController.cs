@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private CapsuleCollider capsuleCollider;
 
-    private float crouchHeight = 1;
+    //private float crouchHeight = 1;
     private float crouchPosition;
 
     // Start is called before the first frame update
